@@ -32,11 +32,9 @@ namespace Sql.Tests
 
         public const string DefaultSecondaryLocationId = "centralus";
 
-        public const string DefaultSecondaryLocation = "Central US";
+        public const string DefaultStagePrimaryLocationId = "southeastasia";
 
-        public const string DefaultStagePrimaryLocation = "North Europe";
-
-        public const string DefaultStageSecondaryLocation = "SouthEast Asia";
+        public const string DefaultStageSecondaryLocation = "northeurope";
 
         public static SqlManagementClient GetSqlManagementClient(MockContext context, RecordedDelegatingHandler handler = null)
         {
@@ -52,7 +50,7 @@ namespace Sql.Tests
 
         public static ResourceManagementClient GetResourceManagementClient(MockContext context, RecordedDelegatingHandler handler)
         {
-            handler.IsPassThrough = true;
+            handler.IsPassThrough = true; 
             var client = context.GetServiceClient<ResourceManagementClient>(handlers: handler);
             return client;
         }
@@ -103,7 +101,14 @@ namespace Sql.Tests
             [System.Runtime.CompilerServices.CallerMemberName]
             string methodName="GenerateName_failed")
         {
-            return HttpMockServer.GetAssetName(methodName, prefix);
+            try
+            {
+                return HttpMockServer.GetAssetName(methodName, prefix);
+            }
+            catch (KeyNotFoundException e)
+            {
+                throw new KeyNotFoundException(string.Format("{0} Value: `{1}`.", e.Message, methodName), e.InnerException);
+            }
         }
 
         public static string GenerateIpAddress()
@@ -331,6 +336,12 @@ namespace Sql.Tests
             Assert.Equal(expectedUri, actual.Uri);
         }
 
+        public static void ValidateVnetFirewallRule(VnetFirewallRule expected, VnetFirewallRule actual, string name)
+        {
+            Assert.NotNull(actual.Id);
+            Assert.Equal(expected.VirtualNetworkSubnetId, actual.VirtualNetworkSubnetId);
+        }
+
         public static void RunTest(string suiteName, string testName, Action<ResourceManagementClient, SqlManagementClient> test)
         {
             using (MockContext context = MockContext.Start(suiteName, testName))
@@ -338,12 +349,11 @@ namespace Sql.Tests
                 var handler = new RecordedDelegatingHandler { StatusCodeToReturn = HttpStatusCode.OK };
                 var resourceClient = SqlManagementTestUtilities.GetResourceManagementClient(context, handler);
                 var sqlClient = SqlManagementTestUtilities.GetSqlManagementClient(context, handler);
-
                 test(resourceClient, sqlClient);
             }
         }
 
-        public static void RunTestInNewResourceGroup(string suiteName, string testName, string resourcePrefix, Action<ResourceManagementClient, SqlManagementClient, ResourceGroup> test)
+        public static void RunTestInNewResourceGroup(string suiteName, string testName, string resourcePrefix, Action<ResourceManagementClient, SqlManagementClient, ResourceGroup> test, string location = DefaultLocationId)
         {
             RunTest(suiteName, testName, (resourceClient, sqlClient) =>
             {
@@ -356,7 +366,7 @@ namespace Sql.Tests
                         rgName,
                         new ResourceGroup
                         {
-                            Location = SqlManagementTestUtilities.DefaultLocation,
+                            Location = location,
                             Tags = new Dictionary<string, string>() { { rgName, DateTime.UtcNow.ToString("u") } }
                         });
 
@@ -373,7 +383,7 @@ namespace Sql.Tests
             });
         }
 
-        internal static void RunTestInNewV12Server(string suiteName, string testName, string testPrefix, Action<ResourceManagementClient, SqlManagementClient, ResourceGroup, Server> test)
+        internal static void RunTestInNewV12Server(string suiteName, string testName, string testPrefix, Action<ResourceManagementClient, SqlManagementClient, ResourceGroup, Server> test, string location = DefaultLocationId)
         {
             RunTestInNewResourceGroup(suiteName, testName, testPrefix, (resClient, sqlClient, resGroup) =>
             {

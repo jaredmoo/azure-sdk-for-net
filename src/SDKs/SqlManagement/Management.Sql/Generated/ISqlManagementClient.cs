@@ -120,6 +120,5 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IServerKeysOperations.
         /// </summary>
         IServerKeysOperations ServerKeys { get; }
-
     }
 }
