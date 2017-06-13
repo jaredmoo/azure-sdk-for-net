@@ -32,9 +32,13 @@ namespace Sql.Tests
 
         public const string DefaultSecondaryLocationId = "centralus";
 
-        public const string DefaultStagePrimaryLocationId = "southeastasia";
+        public const string DefaultSecondaryLocation = "Central US";
 
-        public const string DefaultStageSecondaryLocation = "northeurope";
+        public const string DefaultStagePrimaryLocationId = "northeurope";
+
+        public const string DefaultStagePrimaryLocation = "North Europe";
+
+        public const string DefaultStageSecondaryLocation = "SouthEast Asia";
 
         public static SqlManagementClient GetSqlManagementClient(MockContext context, RecordedDelegatingHandler handler = null)
         {
@@ -50,7 +54,7 @@ namespace Sql.Tests
 
         public static ResourceManagementClient GetResourceManagementClient(MockContext context, RecordedDelegatingHandler handler)
         {
-            handler.IsPassThrough = true; 
+            handler.IsPassThrough = true;
             var client = context.GetServiceClient<ResourceManagementClient>(handlers: handler);
             return client;
         }
@@ -139,7 +143,9 @@ namespace Sql.Tests
             Assert.Equal(login, actual.AdministratorLogin);
             Assert.Equal(version, actual.Version);
             SqlManagementTestUtilities.AssertCollection(tags, actual.Tags);
-            Assert.Equal(location, actual.Location);
+
+            // Location is being returned two different ways across different APIs.
+            Assert.Equal(location.ToLower().Replace(" ", ""), actual.Location.ToLower().Replace(" ", ""));
         }
 
         public static void ValidateDatabase(Database expected, Database actual, string name)
