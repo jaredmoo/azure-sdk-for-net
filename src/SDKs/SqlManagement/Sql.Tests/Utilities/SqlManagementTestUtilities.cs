@@ -34,11 +34,7 @@ namespace Sql.Tests
 
         public const string DefaultSecondaryLocation = "Central US";
 
-        public const string DefaultStagePrimaryLocationId = "northeurope";
-
-        public const string DefaultStagePrimaryLocation = "North Europe";
-
-        public const string DefaultStageSecondaryLocation = "SouthEast Asia";
+        public const string DefaultEuapPrimaryLocation = "East US 2 EUAP";
 
         public static SqlManagementClient GetSqlManagementClient(MockContext context, RecordedDelegatingHandler handler = null)
         {

@@ -27,7 +27,9 @@ namespace Sql.Tests
                 string vnetfirewallRuleName = SqlManagementTestUtilities.GenerateName(testPrefix);
                 VnetFirewallRule rule = new VnetFirewallRule()
                 {
-                    VirtualNetworkSubnetId = string.Format("/subscriptions/79653d5b-24a0-4728-877c-ba3663c6b93d/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1")
+                    VirtualNetworkSubnetId = string.Format(
+                        "/subscriptions/{0}/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1",
+                        sqlClient.SubscriptionId)
                 };
                 sqlClient.VnetFirewallRules.CreateOrUpdate(resourceGroup.Name, server.Name, vnetfirewallRuleName, rule);
                 rules.Add(vnetfirewallRuleName, rule);
@@ -50,7 +52,7 @@ namespace Sql.Tests
                 {
                     SqlManagementTestUtilities.ValidateVnetFirewallRule(rul.Value, listResponse.Single(r => r.Name == rul.Key), rul.Key);
                 }
-            }, location: SqlManagementTestUtilities.DefaultStagePrimaryLocationId);
+            }, location: SqlManagementTestUtilities.DefaultEuapPrimaryLocation);
         }
 
         [Fact]
@@ -66,13 +68,15 @@ namespace Sql.Tests
 
                 VnetFirewallRule toCreate = new VnetFirewallRule()
                 {
-                    VirtualNetworkSubnetId = string.Format("/subscriptions/79653d5b-24a0-4728-877c-ba3663c6b93d/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1")
+                    VirtualNetworkSubnetId = string.Format(
+                        "/subscriptions/{0}/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1",
+                        sqlClient.SubscriptionId)
                 };
                 var vfr1 = sqlClient.VnetFirewallRules.CreateOrUpdate(resourceGroup.Name, server.Name, vnetfirewallRuleName, toCreate);
                 SqlManagementTestUtilities.ValidateVnetFirewallRule(toCreate, vfr1, vnetfirewallRuleName);
 
                 sqlClient.VnetFirewallRules.Delete(resourceGroup.Name, server.Name, vfr1.Name);
-            }, location: SqlManagementTestUtilities.DefaultStagePrimaryLocationId);
+            }, location: SqlManagementTestUtilities.DefaultEuapPrimaryLocation);
         }
 
         [Fact]
@@ -88,7 +92,9 @@ namespace Sql.Tests
 
                 VnetFirewallRule toCreate = new VnetFirewallRule()
                 {
-                    VirtualNetworkSubnetId = string.Format("/subscriptions/79653d5b-24a0-4728-877c-ba3663c6b93d/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1")
+                    VirtualNetworkSubnetId = string.Format(
+                        "/subscriptions/{0}/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1",
+                        sqlClient.SubscriptionId)
                 };
                 var vfr1 = sqlClient.VnetFirewallRules.CreateOrUpdate(resourceGroup.Name, server.Name, vnetfirewallRuleName, toCreate);
                 SqlManagementTestUtilities.ValidateVnetFirewallRule(toCreate, vfr1, vnetfirewallRuleName);
@@ -96,11 +102,13 @@ namespace Sql.Tests
                 // Update Firewall Rule and Validate
                 toCreate = new VnetFirewallRule()
                 {
-                    VirtualNetworkSubnetId = string.Format("/subscriptions/79653d5b-24a0-4728-877c-ba3663c6b93d/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1")
+                    VirtualNetworkSubnetId = string.Format(
+                        "/subscriptions/{0}/resourceGroups/TestvnetRg/providers/Microsoft.Network/virtualNetworks/vnetTestSdk/subnets/subnet1",
+                        sqlClient.SubscriptionId)
                 };
                 vfr1 = sqlClient.VnetFirewallRules.CreateOrUpdate(resourceGroup.Name, server.Name, vnetfirewallRuleName, toCreate);
                 SqlManagementTestUtilities.ValidateVnetFirewallRule(toCreate, vfr1, vnetfirewallRuleName);
-            }, location: SqlManagementTestUtilities.DefaultStagePrimaryLocationId);
+            }, location: SqlManagementTestUtilities.DefaultEuapPrimaryLocation);
         }
     }
 }
