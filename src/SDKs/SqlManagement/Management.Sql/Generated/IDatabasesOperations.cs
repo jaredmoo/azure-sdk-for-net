@@ -700,7 +700,7 @@ namespace Microsoft.Azure.Management.Sql
         /// The name of the database to be updated.
         /// </param>
         /// <param name='parameters'>
-        /// The required parameters for creating or updating a database.
+        /// The required parameters for updating a database.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -717,7 +717,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Deletes a database.
         /// </summary>
@@ -1498,7 +1498,7 @@ namespace Microsoft.Azure.Management.Sql
         /// The name of the database to be updated.
         /// </param>
         /// <param name='parameters'>
-        /// The required parameters for creating or updating a database.
+        /// The required parameters for updating a database.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -1515,7 +1515,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Creates or updates a database backup long term retention policy
         /// </summary>

@@ -74,7 +74,8 @@ namespace Sql.Tests
             SqlManagementTestUtilities.RunTestInNewV12Server(suiteName, "TestUpdateElasticPoolWithCreateOrUpdateAndListActivity", testPrefix, (resClient, sqlClient, resourceGroup, server) =>
             {
                 Func<string, string, string, ElasticPool, ElasticPool> updateFunc = sqlClient.ElasticPools.CreateOrUpdate;
-                TestUpdateElasticPool(resClient, sqlClient, resourceGroup, server, updateFunc);
+                Func<ElasticPool> createModelFunc = () => new ElasticPool(server.Location);
+                TestUpdateElasticPool(resClient, sqlClient, resourceGroup, server, createModelFunc, updateFunc);
             });
         }
 
@@ -85,17 +86,19 @@ namespace Sql.Tests
             string suiteName = this.GetType().FullName;
             SqlManagementTestUtilities.RunTestInNewV12Server(suiteName, "TestUpdateElasticPoolWithUpdateAndListActivity", testPrefix, (resClient, sqlClient, resourceGroup, server) =>
             {
-                Func<string, string, string, ElasticPool, ElasticPool> updateFunc = sqlClient.ElasticPools.Update;
-                TestUpdateElasticPool(resClient, sqlClient, resourceGroup, server, updateFunc);
+                Func<string, string, string, ElasticPoolUpdate, ElasticPool> updateFunc = sqlClient.ElasticPools.Update;
+                Func<ElasticPoolUpdate> createModelFunc = () => new ElasticPoolUpdate();
+                TestUpdateElasticPool(resClient, sqlClient, resourceGroup, server, createModelFunc, updateFunc);
             });
         }
 
-        private void TestUpdateElasticPool(
+        private void TestUpdateElasticPool<TUpdateModel>(
             ResourceManagementClient resClient,
             SqlManagementClient sqlClient,
             ResourceGroup resourceGroup,
             Server server,
-            Func<string, string, string, ElasticPool, ElasticPool> updateFunc)
+            Func<TUpdateModel> createModelFunc,
+            Func<string, string, string, TUpdateModel, ElasticPool> updateFunc)
         {
             Dictionary<string, string> tags = new Dictionary<string, string>()
                 {
@@ -123,11 +126,9 @@ namespace Sql.Tests
 
             // Update elasticPool Dtu
             // 
-            ElasticPool epInput2 = new ElasticPool()
-            {
-                Location = server.Location,
-                Dtu = 200
-            };
+            dynamic epInput2 = createModelFunc();
+            epInput2.Dtu = 200;
+
             returnedEp = updateFunc(resourceGroup.Name, server.Name, epName, epInput2);
             SqlManagementTestUtilities.ValidateElasticPool(epInput2, returnedEp, epName);
             epa = sqlClient.ElasticPools.ListActivity(resourceGroup.Name, server.Name, epName);
@@ -138,11 +139,9 @@ namespace Sql.Tests
 
             // Update elasticPool Dtu Max
             // 
-            ElasticPool epInput3 = new ElasticPool()
-            {
-                Location = server.Location,
-                DatabaseDtuMax = 100
-            };
+            dynamic epInput3 = createModelFunc();
+            epInput3.DatabaseDtuMax = 100;
+
             returnedEp = updateFunc(resourceGroup.Name, server.Name, epName, epInput3);
             SqlManagementTestUtilities.ValidateElasticPool(epInput3, returnedEp, epName);
             epa = sqlClient.ElasticPools.ListActivity(resourceGroup.Name, server.Name, epName);
@@ -153,11 +152,9 @@ namespace Sql.Tests
 
             // Update elasticPool Dtu Min
             // 
-            ElasticPool epInput4 = new ElasticPool()
-            {
-                Location = server.Location,
-                DatabaseDtuMin = 10
-            };
+            dynamic epInput4 = createModelFunc();
+            epInput4.DatabaseDtuMin = 10;
+
             returnedEp = updateFunc(resourceGroup.Name, server.Name, epName, epInput4);
             SqlManagementTestUtilities.ValidateElasticPool(epInput4, returnedEp, epName);
             epa = sqlClient.ElasticPools.ListActivity(resourceGroup.Name, server.Name, epName);

@@ -1,13 +1,16 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Microsoft.Azure.Management.ResourceManager;
 using Microsoft.Azure.Management.ResourceManager.Models;
 using Microsoft.Azure.Management.Sql;
 using Microsoft.Azure.Management.Sql.Models;
+using Microsoft.Azure.Test.HttpRecorder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 namespace Sql.Tests
@@ -111,7 +114,8 @@ namespace Sql.Tests
                 // For 2014-04-01, PUT and PATCH are so similar in behavior that we can test them with common code.
                 // This might not be the same for future api versions.
                 Func<string, string, string, Database, Database> updateFunc = sqlClient.Databases.CreateOrUpdate;
-                TestUpdateDatabase(resClient, sqlClient, resourceGroup, server, updateFunc);
+                Func<Database> createModelFunc = () => new Database(server.Location);
+                TestUpdateDatabase(resClient, sqlClient, resourceGroup, server, createModelFunc, updateFunc);
             });
         }
 
@@ -124,17 +128,19 @@ namespace Sql.Tests
             {
                 // For 2014-04-01, PUT and PATCH are so similar in behavior that we can test them with common code.
                 // This might not be the same for future api versions.
-                Func<string, string, string, Database, Database> updateFunc = sqlClient.Databases.Update;
-                TestUpdateDatabase(resClient, sqlClient, resourceGroup, server, updateFunc);
+                Func<string, string, string, DatabaseUpdate, Database> updateFunc = sqlClient.Databases.Update;
+                Func<DatabaseUpdate> createModelFunc = () => new DatabaseUpdate();
+                TestUpdateDatabase(resClient, sqlClient, resourceGroup, server, createModelFunc, updateFunc);
             });
         }
 
-        private void TestUpdateDatabase(
+        private void TestUpdateDatabase<TUpdateModel>(
             ResourceManagementClient resClient,
             SqlManagementClient sqlClient,
             ResourceGroup resourceGroup,
             Server server,
-            Func<string,string, string, Database, Database> updateFunc)
+            Func<TUpdateModel> createModelFunc,
+            Func<string, string, string, TUpdateModel, Database> updateFunc)
         {
             Dictionary<string, string> tags = new Dictionary<string, string>()
                 {
@@ -161,64 +167,53 @@ namespace Sql.Tests
 
             // Upgrade Edition + SLO Name
             //
-            var updateEditionAndSloInput = new Database()
-            {
-                Edition = DatabaseEdition.Standard,
-                RequestedServiceObjectiveName = ServiceObjectiveName.S0,
-                Location = server.Location
-            };
+            dynamic updateEditionAndSloInput = createModelFunc();
+            updateEditionAndSloInput.Edition = DatabaseEdition.Standard;
+            updateEditionAndSloInput.RequestedServiceObjectiveName = ServiceObjectiveName.S0;
             var db2 = updateFunc(resourceGroup.Name, server.Name, dbName, updateEditionAndSloInput);
             SqlManagementTestUtilities.ValidateDatabase(updateEditionAndSloInput, db2, dbName);
 
             // Upgrade Edition + SLO ID
             //
-            var updateEditionAndSloInput2 = new Database()
-            {
-                Edition = SqlTestConstants.DefaultDatabaseEdition,
-                RequestedServiceObjectiveId = ServiceObjectiveId.Basic,
-                Location = server.Location
-            };
+            dynamic updateEditionAndSloInput2 = createModelFunc();
+            updateEditionAndSloInput2.Edition = SqlTestConstants.DefaultDatabaseEdition;
+            updateEditionAndSloInput2.RequestedServiceObjectiveId = ServiceObjectiveId.Basic;
             var db3 = updateFunc(resourceGroup.Name, server.Name, dbName, updateEditionAndSloInput2);
             SqlManagementTestUtilities.ValidateDatabase(updateEditionAndSloInput2, db3, dbName);
 
             // Upgrade Edition
             //
-            var updateEditionInput = new Database()
-            {
-                Edition = DatabaseEdition.Premium,
-                Location = server.Location
-            };
+            dynamic updateEditionInput = createModelFunc();
+            updateEditionInput.Edition = DatabaseEdition.Premium;
             var db4 = updateFunc(resourceGroup.Name, server.Name, dbName, updateEditionInput);
             SqlManagementTestUtilities.ValidateDatabase(updateEditionInput, db4, dbName);
 
             // Upgrade SLO ID & Slo Name
             //
-            var updateSloInput2 = new Database()
-            {
-                RequestedServiceObjectiveName = ServiceObjectiveName.P2,
-                RequestedServiceObjectiveId = ServiceObjectiveId.P2,
-                Location = server.Location
-            };
+            dynamic updateSloInput2 = createModelFunc();
+            updateSloInput2.RequestedServiceObjectiveName = ServiceObjectiveName.P2;
+            updateSloInput2.RequestedServiceObjectiveId = ServiceObjectiveId.P2;
             var db5 = updateFunc(resourceGroup.Name, server.Name, dbName, updateSloInput2);
             SqlManagementTestUtilities.ValidateDatabase(updateSloInput2, db5, dbName);
 
+            // Sometimes we get CloudException "Operation on server '{0}' and database '{1}' is in progress."
+            // Mitigate by adding brief sleep while recording
+            if (HttpMockServer.Mode == HttpRecorderMode.Record)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(10));
+            }
+
             // Update max size
             //
-            var updateMaxSize = new Database()
-            {
-                MaxSizeBytes = (250 * 1024L * 1024L * 1024L).ToString(),
-                Location = server.Location
-            };
+            dynamic updateMaxSize = createModelFunc();
+            updateMaxSize.MaxSizeBytes = (250 * 1024L * 1024L * 1024L).ToString();
             var db6 = updateFunc(resourceGroup.Name, server.Name, dbName, updateMaxSize);
             SqlManagementTestUtilities.ValidateDatabase(updateMaxSize, db6, dbName);
 
             // Update tags
             //
-            var updateTags = new Database()
-            {
-                Tags = new Dictionary<string, string> { { "asdf", "zxcv" } },
-                Location = server.Location
-            };
+            dynamic updateTags = createModelFunc();
+            updateTags.Tags = new Dictionary<string, string> { { "asdf", "zxcv" } };
             var db7 = updateFunc(resourceGroup.Name, server.Name, dbName, updateTags);
             SqlManagementTestUtilities.ValidateDatabase(updateTags, db7, dbName);
         }

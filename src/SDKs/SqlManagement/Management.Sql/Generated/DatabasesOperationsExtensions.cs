@@ -1111,9 +1111,9 @@ namespace Microsoft.Azure.Management.Sql
             /// The name of the database to be updated.
             /// </param>
             /// <param name='parameters'>
-            /// The required parameters for creating or updating a database.
+            /// The required parameters for updating a database.
             /// </param>
-            public static Database Update(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, Database parameters)
+            public static Database Update(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters)
             {
                 return operations.UpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -1135,12 +1135,12 @@ namespace Microsoft.Azure.Management.Sql
             /// The name of the database to be updated.
             /// </param>
             /// <param name='parameters'>
-            /// The required parameters for creating or updating a database.
+            /// The required parameters for updating a database.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Database> UpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, Database parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Database> UpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -2398,9 +2398,9 @@ namespace Microsoft.Azure.Management.Sql
             /// The name of the database to be updated.
             /// </param>
             /// <param name='parameters'>
-            /// The required parameters for creating or updating a database.
+            /// The required parameters for updating a database.
             /// </param>
-            public static Database BeginUpdate(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, Database parameters)
+            public static Database BeginUpdate(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters)
             {
                 return operations.BeginUpdateAsync(resourceGroupName, serverName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -2422,12 +2422,12 @@ namespace Microsoft.Azure.Management.Sql
             /// The name of the database to be updated.
             /// </param>
             /// <param name='parameters'>
-            /// The required parameters for creating or updating a database.
+            /// The required parameters for updating a database.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Database> BeginUpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, Database parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Database> BeginUpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {

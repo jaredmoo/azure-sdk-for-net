@@ -3068,7 +3068,7 @@ namespace Microsoft.Azure.Management.Sql
         /// The name of the database to be updated.
         /// </param>
         /// <param name='parameters'>
-        /// The required parameters for creating or updating a database.
+        /// The required parameters for updating a database.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -3076,7 +3076,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
             AzureOperationResponse<Database> _response = await BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, databaseName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
@@ -7983,7 +7983,7 @@ namespace Microsoft.Azure.Management.Sql
         /// The name of the database to be updated.
         /// </param>
         /// <param name='parameters'>
-        /// The required parameters for creating or updating a database.
+        /// The required parameters for updating a database.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -8006,7 +8006,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Client.SubscriptionId == null)
             {

@@ -198,7 +198,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for updating an elastic pool.
             /// </param>
-            public static ElasticPool Update(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters)
+            public static ElasticPool Update(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters)
             {
                 return operations.UpdateAsync(resourceGroupName, serverName, elasticPoolName, parameters).GetAwaiter().GetResult();
             }
@@ -225,7 +225,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ElasticPool> UpdateAsync(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ElasticPool> UpdateAsync(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateWithHttpMessagesAsync(resourceGroupName, serverName, elasticPoolName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -639,7 +639,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='parameters'>
             /// The required parameters for updating an elastic pool.
             /// </param>
-            public static ElasticPool BeginUpdate(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters)
+            public static ElasticPool BeginUpdate(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters)
             {
                 return operations.BeginUpdateAsync(resourceGroupName, serverName, elasticPoolName, parameters).GetAwaiter().GetResult();
             }
@@ -666,7 +666,7 @@ namespace Microsoft.Azure.Management.Sql
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ElasticPool> BeginUpdateAsync(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ElasticPool> BeginUpdateAsync(this IElasticPoolsOperations operations, string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, elasticPoolName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {

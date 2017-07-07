@@ -521,7 +521,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<ElasticPool>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<ElasticPool>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
             AzureOperationResponse<ElasticPool> _response = await BeginUpdateWithHttpMessagesAsync(resourceGroupName, serverName, elasticPoolName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
@@ -2212,7 +2212,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<ElasticPool>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<ElasticPool>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Client.SubscriptionId == null)
             {

@@ -153,7 +153,7 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<ElasticPool>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<ElasticPool>> UpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Deletes the elastic pool.
         /// </summary>
@@ -427,6 +427,6 @@ namespace Microsoft.Azure.Management.Sql
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse<ElasticPool>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPool parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<ElasticPool>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string serverName, string elasticPoolName, ElasticPoolUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
