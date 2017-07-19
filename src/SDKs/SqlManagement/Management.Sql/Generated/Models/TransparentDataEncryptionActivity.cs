@@ -20,7 +20,7 @@ namespace Microsoft.Azure.Management.Sql.Models
     /// Represents a database transparent data encryption Scan.
     /// </summary>
     [Rest.Serialization.JsonTransformation]
-    public partial class TransparentDataEncryptionActivity : SubResource
+    public partial class TransparentDataEncryptionActivity : ProxyResource
     {
         /// <summary>
         /// Initializes a new instance of the TransparentDataEncryptionActivity
@@ -35,14 +35,15 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// Initializes a new instance of the TransparentDataEncryptionActivity
         /// class.
         /// </summary>
-        /// <param name="name">Resource name</param>
-        /// <param name="id">The resource ID.</param>
+        /// <param name="id">Resource ID.</param>
+        /// <param name="name">Resource name.</param>
+        /// <param name="type">Resource type.</param>
         /// <param name="status">The status of the database. Possible values
         /// include: 'Encrypting', 'Decrypting'</param>
         /// <param name="percentComplete">The percent complete of the
         /// transparent data encryption scan for a database.</param>
-        public TransparentDataEncryptionActivity(string name = default(string), string id = default(string), string status = default(string), double? percentComplete = default(double?))
-            : base(name, id)
+        public TransparentDataEncryptionActivity(string id = default(string), string name = default(string), string type = default(string), string status = default(string), double? percentComplete = default(double?))
+            : base(id, name, type)
         {
             Status = status;
             PercentComplete = percentComplete;

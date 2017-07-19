@@ -22,7 +22,7 @@ namespace Microsoft.Azure.Management.Sql
     public static partial class ServerKeysOperationsExtensions
     {
             /// <summary>
-            /// Returns a list of server keys.
+            /// Gets a list of server keys.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -40,7 +40,7 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Returns a list of server keys.
+            /// Gets a list of server keys.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -64,7 +64,7 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Returns a server key.
+            /// Gets a server key.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -85,7 +85,7 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Returns a server key.
+            /// Gets a server key.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -330,7 +330,7 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Returns a list of server keys.
+            /// Gets a list of server keys.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -344,7 +344,7 @@ namespace Microsoft.Azure.Management.Sql
             }
 
             /// <summary>
-            /// Returns a list of server keys.
+            /// Gets a list of server keys.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
