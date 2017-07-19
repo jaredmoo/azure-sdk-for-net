@@ -19,31 +19,22 @@ namespace Microsoft.Azure.Management.Sql.Models
     using System.Linq;
 
     /// <summary>
-    /// An Azure SQL Database server.
+    /// An update request for an Azure SQL Database server.
     /// </summary>
     [Rest.Serialization.JsonTransformation]
-    public partial class Server : TrackedResource
+    public partial class ServerUpdate
     {
         /// <summary>
-        /// Initializes a new instance of the Server class.
+        /// Initializes a new instance of the ServerUpdate class.
         /// </summary>
-        public Server()
+        public ServerUpdate()
         {
           CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the Server class.
+        /// Initializes a new instance of the ServerUpdate class.
         /// </summary>
-        /// <param name="location">Resource location.</param>
-        /// <param name="id">Resource ID.</param>
-        /// <param name="name">Resource name.</param>
-        /// <param name="type">Resource type.</param>
-        /// <param name="tags">Resource tags.</param>
-        /// <param name="identity">The Azure Active Directory identity of the
-        /// server.</param>
-        /// <param name="kind">Kind of sql server. This is metadata used for
-        /// the Azure portal experience.</param>
         /// <param name="administratorLogin">Administrator username for the
         /// server. Once created it cannot be changed.</param>
         /// <param name="administratorLoginPassword">The administrator login
@@ -52,16 +43,15 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// <param name="state">The state of the server.</param>
         /// <param name="fullyQualifiedDomainName">The fully qualified domain
         /// name of the server.</param>
-        public Server(string location, string id = default(string), string name = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), ResourceIdentity identity = default(ResourceIdentity), string kind = default(string), string administratorLogin = default(string), string administratorLoginPassword = default(string), string version = default(string), string state = default(string), string fullyQualifiedDomainName = default(string))
-            : base(location, id, name, type, tags)
+        /// <param name="tags">Resource tags.</param>
+        public ServerUpdate(string administratorLogin = default(string), string administratorLoginPassword = default(string), string version = default(string), string state = default(string), string fullyQualifiedDomainName = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>))
         {
-            Identity = identity;
-            Kind = kind;
             AdministratorLogin = administratorLogin;
             AdministratorLoginPassword = administratorLoginPassword;
             Version = version;
             State = state;
             FullyQualifiedDomainName = fullyQualifiedDomainName;
+            Tags = tags;
             CustomInit();
         }
 
@@ -69,19 +59,6 @@ namespace Microsoft.Azure.Management.Sql.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// Gets or sets the Azure Active Directory identity of the server.
-        /// </summary>
-        [JsonProperty(PropertyName = "identity")]
-        public ResourceIdentity Identity { get; set; }
-
-        /// <summary>
-        /// Gets kind of sql server. This is metadata used for the Azure portal
-        /// experience.
-        /// </summary>
-        [JsonProperty(PropertyName = "kind")]
-        public string Kind { get; private set; }
 
         /// <summary>
         /// Gets or sets administrator username for the server. Once created it
@@ -116,14 +93,10 @@ namespace Microsoft.Azure.Management.Sql.Models
         public string FullyQualifiedDomainName { get; private set; }
 
         /// <summary>
-        /// Validate the object.
+        /// Gets or sets resource tags.
         /// </summary>
-        /// <exception cref="ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public override void Validate()
-        {
-            base.Validate();
-        }
+        [JsonProperty(PropertyName = "tags")]
+        public IDictionary<string, string> Tags { get; set; }
+
     }
 }
