@@ -4,14 +4,56 @@
 using Microsoft.Azure.Management.ResourceManager;
 using Microsoft.Azure.Management.Sql;
 using Microsoft.Azure.Management.Sql.Models;
+using Microsoft.Graph;
+using Microsoft.Rest;
+using Microsoft.Rest.Azure.Authentication;
+using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Sql.Tests
 {
     public class AzureRmSqlServerActiveDirectoryAdministratorTest
     {
+        private async Task<ServiceClientCredentials> CreateGraphCredentialsAsync()
+        {
+            TestEnvironment testEnvironment = TestEnvironmentFactory.GetTestEnvironment();
+            return await ApplicationTokenProvider.LoginSilentAsync(
+                domain: testEnvironment.Tenant,
+                clientId: testEnvironment.ConnectionString.KeyValuePairs[ConnectionStringKeys.ServicePrincipalKey],
+                secret: testEnvironment.ConnectionString.KeyValuePairs[ConnectionStringKeys.ServicePrincipalSecretKey],
+                settings: new ActiveDirectoryServiceSettings
+                {
+                    AuthenticationEndpoint = new Uri(
+                        testEnvironment.Endpoints.AADAuthUri.ToString() +
+                        testEnvironment.ConnectionString.KeyValuePairs[ConnectionStringKeys.AADTenantKey]),
+                    TokenAudience = testEnvironment.Endpoints.GraphTokenAudienceUri
+                });
+        }
+
+        [Fact]
+        public async Task TestGraphClient()
+        {
+            using (SqlManagementTestContext context = new SqlManagementTestContext(this))
+            {
+                ServiceClientCredentials credentials = await CreateGraphCredentialsAsync();
+                IAuthenticationProvider authenticationProvider = new DelegateAuthenticationProvider(async request =>
+                {
+                    await credentials.ProcessHttpRequestAsync(request, CancellationToken.None);
+                });
+
+                TestEnvironment testEnvironment = TestEnvironmentFactory.GetTestEnvironment();
+                GraphServiceClient graphClient = new GraphServiceClient(
+                    testEnvironment.Endpoints.GraphUri.ToString(),
+                    authenticationProvider);
+
+                User me = await graphClient.Me.Request().GetAsync();
+            }
+        }
+
         [Fact]
         public void TestSetServerActiveDirectoryAdministrator()
         {

@@ -20,10 +20,10 @@ namespace Sql.Tests
             [CallerMemberName]
             string testName="error_determining_test_name")
         {
-            _mockContext = MockContext.Start(suiteObject.GetType().FullName, testName);
+            MockContext = MockContext.Start(suiteObject.GetType().FullName, testName);
         }
 
-        private readonly MockContext _mockContext;
+        public MockContext MockContext { get; private set; }
 
         private readonly RecordedDelegatingHandler _handler = new RecordedDelegatingHandler
         {
@@ -46,7 +46,7 @@ namespace Sql.Tests
                 return (TServiceClient)clientObject;
             }
 
-            TServiceClient client = _mockContext.GetServiceClient<TServiceClient>();
+            TServiceClient client = MockContext.GetServiceClient<TServiceClient>();
             _serviceClientCache.Add(typeof(TServiceClient), client);
             return client;
         }
@@ -110,7 +110,7 @@ namespace Sql.Tests
                     }
 
                     // Dispose context
-                    _mockContext.Dispose();
+                    MockContext.Dispose();
                 }
 
                 disposedValue = true;
