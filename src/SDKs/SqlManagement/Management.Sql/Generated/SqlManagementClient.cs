@@ -272,6 +272,41 @@ namespace Microsoft.Azure.Management.Sql
         public virtual IServerAutomaticTuningOperations ServerAutomaticTuning { get; private set; }
 
         /// <summary>
+        /// Gets the IJobAgentsOperations.
+        /// </summary>
+        public virtual IJobAgentsOperations JobAgents { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobCredentialsOperations.
+        /// </summary>
+        public virtual IJobCredentialsOperations JobCredentials { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobExecutionsOperations.
+        /// </summary>
+        public virtual IJobExecutionsOperations JobExecutions { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobsOperations.
+        /// </summary>
+        public virtual IJobsOperations Jobs { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobStepsOperations.
+        /// </summary>
+        public virtual IJobStepsOperations JobSteps { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobTargetGroupsOperations.
+        /// </summary>
+        public virtual IJobTargetGroupsOperations JobTargetGroups { get; private set; }
+
+        /// <summary>
+        /// Gets the IJobVersionsOperations.
+        /// </summary>
+        public virtual IJobVersionsOperations JobVersions { get; private set; }
+
+        /// <summary>
         /// Gets the IServerDnsAliasesOperations.
         /// </summary>
         public virtual IServerDnsAliasesOperations ServerDnsAliases { get; private set; }
@@ -517,6 +552,13 @@ namespace Microsoft.Azure.Management.Sql
             VirtualNetworkRules = new VirtualNetworkRulesOperations(this);
             DatabaseOperations = new DatabaseOperations(this);
             ServerAutomaticTuning = new ServerAutomaticTuningOperations(this);
+            JobAgents = new JobAgentsOperations(this);
+            JobCredentials = new JobCredentialsOperations(this);
+            JobExecutions = new JobExecutionsOperations(this);
+            Jobs = new JobsOperations(this);
+            JobSteps = new JobStepsOperations(this);
+            JobTargetGroups = new JobTargetGroupsOperations(this);
+            JobVersions = new JobVersionsOperations(this);
             ServerDnsAliases = new ServerDnsAliasesOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
             AcceptLanguage = "en-US";
