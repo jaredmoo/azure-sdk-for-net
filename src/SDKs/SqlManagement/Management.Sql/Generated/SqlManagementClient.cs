@@ -127,6 +127,11 @@ namespace Microsoft.Azure.Management.Sql
         public virtual IDataMaskingRulesOperations DataMaskingRules { get; private set; }
 
         /// <summary>
+        /// Gets the IElasticPoolsOperations.
+        /// </summary>
+        public virtual IElasticPoolsOperations ElasticPools { get; private set; }
+
+        /// <summary>
         /// Gets the IFirewallRulesOperations.
         /// </summary>
         public virtual IFirewallRulesOperations FirewallRules { get; private set; }
@@ -135,11 +140,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IGeoBackupPoliciesOperations.
         /// </summary>
         public virtual IGeoBackupPoliciesOperations GeoBackupPolicies { get; private set; }
-
-        /// <summary>
-        /// Gets the IElasticPoolsOperations.
-        /// </summary>
-        public virtual IElasticPoolsOperations ElasticPools { get; private set; }
 
         /// <summary>
         /// Gets the IReplicationLinksOperations.
@@ -478,9 +478,9 @@ namespace Microsoft.Azure.Management.Sql
             DatabaseThreatDetectionPolicies = new DatabaseThreatDetectionPoliciesOperations(this);
             DataMaskingPolicies = new DataMaskingPoliciesOperations(this);
             DataMaskingRules = new DataMaskingRulesOperations(this);
+            ElasticPools = new ElasticPoolsOperations(this);
             FirewallRules = new FirewallRulesOperations(this);
             GeoBackupPolicies = new GeoBackupPoliciesOperations(this);
-            ElasticPools = new ElasticPoolsOperations(this);
             ReplicationLinks = new ReplicationLinksOperations(this);
             ServerAzureADAdministrators = new ServerAzureADAdministratorsOperations(this);
             ServerCommunicationLinks = new ServerCommunicationLinksOperations(this);
