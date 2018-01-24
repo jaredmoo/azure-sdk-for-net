@@ -102,6 +102,11 @@ namespace Microsoft.Azure.Management.Sql
         IServerConnectionPoliciesOperations ServerConnectionPolicies { get; }
 
         /// <summary>
+        /// Gets the IDatabasesOperations.
+        /// </summary>
+        IDatabasesOperations Databases { get; }
+
+        /// <summary>
         /// Gets the IDatabaseThreatDetectionPoliciesOperations.
         /// </summary>
         IDatabaseThreatDetectionPoliciesOperations DatabaseThreatDetectionPolicies { get; }
@@ -125,11 +130,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IGeoBackupPoliciesOperations.
         /// </summary>
         IGeoBackupPoliciesOperations GeoBackupPolicies { get; }
-
-        /// <summary>
-        /// Gets the IDatabasesOperations.
-        /// </summary>
-        IDatabasesOperations Databases { get; }
 
         /// <summary>
         /// Gets the IElasticPoolsOperations.
