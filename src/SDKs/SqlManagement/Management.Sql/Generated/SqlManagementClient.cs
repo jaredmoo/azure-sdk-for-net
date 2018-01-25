@@ -102,6 +102,11 @@ namespace Microsoft.Azure.Management.Sql
         public virtual ICapabilitiesOperations Capabilities { get; private set; }
 
         /// <summary>
+        /// Gets the IServersOperations.
+        /// </summary>
+        public virtual IServersOperations Servers { get; private set; }
+
+        /// <summary>
         /// Gets the IServerConnectionPoliciesOperations.
         /// </summary>
         public virtual IServerConnectionPoliciesOperations ServerConnectionPolicies { get; private set; }
@@ -160,11 +165,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IServiceObjectivesOperations.
         /// </summary>
         public virtual IServiceObjectivesOperations ServiceObjectives { get; private set; }
-
-        /// <summary>
-        /// Gets the IServersOperations.
-        /// </summary>
-        public virtual IServersOperations Servers { get; private set; }
 
         /// <summary>
         /// Gets the IElasticPoolActivitiesOperations.
@@ -473,6 +473,7 @@ namespace Microsoft.Azure.Management.Sql
             RecoverableDatabases = new RecoverableDatabasesOperations(this);
             RestorableDroppedDatabases = new RestorableDroppedDatabasesOperations(this);
             Capabilities = new CapabilitiesOperations(this);
+            Servers = new ServersOperations(this);
             ServerConnectionPolicies = new ServerConnectionPoliciesOperations(this);
             Databases = new DatabasesOperations(this);
             DatabaseThreatDetectionPolicies = new DatabaseThreatDetectionPoliciesOperations(this);
@@ -485,7 +486,6 @@ namespace Microsoft.Azure.Management.Sql
             ServerAzureADAdministrators = new ServerAzureADAdministratorsOperations(this);
             ServerCommunicationLinks = new ServerCommunicationLinksOperations(this);
             ServiceObjectives = new ServiceObjectivesOperations(this);
-            Servers = new ServersOperations(this);
             ElasticPoolActivities = new ElasticPoolActivitiesOperations(this);
             ElasticPoolDatabaseActivities = new ElasticPoolDatabaseActivitiesOperations(this);
             RecommendedElasticPools = new RecommendedElasticPoolsOperations(this);

@@ -97,6 +97,11 @@ namespace Microsoft.Azure.Management.Sql
         ICapabilitiesOperations Capabilities { get; }
 
         /// <summary>
+        /// Gets the IServersOperations.
+        /// </summary>
+        IServersOperations Servers { get; }
+
+        /// <summary>
         /// Gets the IServerConnectionPoliciesOperations.
         /// </summary>
         IServerConnectionPoliciesOperations ServerConnectionPolicies { get; }
@@ -155,11 +160,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IServiceObjectivesOperations.
         /// </summary>
         IServiceObjectivesOperations ServiceObjectives { get; }
-
-        /// <summary>
-        /// Gets the IServersOperations.
-        /// </summary>
-        IServersOperations Servers { get; }
 
         /// <summary>
         /// Gets the IElasticPoolActivitiesOperations.
