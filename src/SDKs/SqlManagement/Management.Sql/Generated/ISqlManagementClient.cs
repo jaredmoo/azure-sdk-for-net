@@ -97,9 +97,19 @@ namespace Microsoft.Azure.Management.Sql
         ICapabilitiesOperations Capabilities { get; }
 
         /// <summary>
+        /// Gets the IServersOperations.
+        /// </summary>
+        IServersOperations Servers { get; }
+
+        /// <summary>
         /// Gets the IServerConnectionPoliciesOperations.
         /// </summary>
         IServerConnectionPoliciesOperations ServerConnectionPolicies { get; }
+
+        /// <summary>
+        /// Gets the IDatabasesOperations.
+        /// </summary>
+        IDatabasesOperations Databases { get; }
 
         /// <summary>
         /// Gets the IDatabaseThreatDetectionPoliciesOperations.
@@ -117,6 +127,11 @@ namespace Microsoft.Azure.Management.Sql
         IDataMaskingRulesOperations DataMaskingRules { get; }
 
         /// <summary>
+        /// Gets the IElasticPoolsOperations.
+        /// </summary>
+        IElasticPoolsOperations ElasticPools { get; }
+
+        /// <summary>
         /// Gets the IFirewallRulesOperations.
         /// </summary>
         IFirewallRulesOperations FirewallRules { get; }
@@ -125,16 +140,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IGeoBackupPoliciesOperations.
         /// </summary>
         IGeoBackupPoliciesOperations GeoBackupPolicies { get; }
-
-        /// <summary>
-        /// Gets the IDatabasesOperations.
-        /// </summary>
-        IDatabasesOperations Databases { get; }
-
-        /// <summary>
-        /// Gets the IElasticPoolsOperations.
-        /// </summary>
-        IElasticPoolsOperations ElasticPools { get; }
 
         /// <summary>
         /// Gets the IReplicationLinksOperations.
@@ -155,11 +160,6 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IServiceObjectivesOperations.
         /// </summary>
         IServiceObjectivesOperations ServiceObjectives { get; }
-
-        /// <summary>
-        /// Gets the IServersOperations.
-        /// </summary>
-        IServersOperations Servers { get; }
 
         /// <summary>
         /// Gets the IElasticPoolActivitiesOperations.
@@ -300,6 +300,11 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IJobVersionsOperations.
         /// </summary>
         IJobVersionsOperations JobVersions { get; }
+
+        /// <summary>
+        /// Gets the IServerAutomaticTuningOperations.
+        /// </summary>
+        IServerAutomaticTuningOperations ServerAutomaticTuning { get; }
 
         /// <summary>
         /// Gets the IServerDnsAliasesOperations.
