@@ -127,11 +127,6 @@ namespace Microsoft.Azure.Management.Sql
         public virtual IDataMaskingRulesOperations DataMaskingRules { get; private set; }
 
         /// <summary>
-        /// Gets the IElasticPoolsOperations.
-        /// </summary>
-        public virtual IElasticPoolsOperations ElasticPools { get; private set; }
-
-        /// <summary>
         /// Gets the IFirewallRulesOperations.
         /// </summary>
         public virtual IFirewallRulesOperations FirewallRules { get; private set; }
@@ -145,6 +140,11 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IDatabasesOperations.
         /// </summary>
         public virtual IDatabasesOperations Databases { get; private set; }
+
+        /// <summary>
+        /// Gets the IElasticPoolsOperations.
+        /// </summary>
+        public virtual IElasticPoolsOperations ElasticPools { get; private set; }
 
         /// <summary>
         /// Gets the IReplicationLinksOperations.
@@ -275,6 +275,11 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IDatabaseOperations.
         /// </summary>
         public virtual IDatabaseOperations DatabaseOperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IElasticPoolOperations.
+        /// </summary>
+        public virtual IElasticPoolOperations ElasticPoolOperations { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SqlManagementClient class.
@@ -488,10 +493,10 @@ namespace Microsoft.Azure.Management.Sql
             DatabaseThreatDetectionPolicies = new DatabaseThreatDetectionPoliciesOperations(this);
             DataMaskingPolicies = new DataMaskingPoliciesOperations(this);
             DataMaskingRules = new DataMaskingRulesOperations(this);
-            ElasticPools = new ElasticPoolsOperations(this);
             FirewallRules = new FirewallRulesOperations(this);
             GeoBackupPolicies = new GeoBackupPoliciesOperations(this);
             Databases = new DatabasesOperations(this);
+            ElasticPools = new ElasticPoolsOperations(this);
             ReplicationLinks = new ReplicationLinksOperations(this);
             ServerAzureADAdministrators = new ServerAzureADAdministratorsOperations(this);
             ServerCommunicationLinks = new ServerCommunicationLinksOperations(this);
@@ -518,6 +523,7 @@ namespace Microsoft.Azure.Management.Sql
             ServerAutomaticTuning = new ServerAutomaticTuningOperations(this);
             ServerDnsAliases = new ServerDnsAliasesOperations(this);
             DatabaseOperations = new DatabaseOperations(this);
+            ElasticPoolOperations = new ElasticPoolOperations(this);
             BaseUri = new System.Uri("https://management.azure.com");
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;

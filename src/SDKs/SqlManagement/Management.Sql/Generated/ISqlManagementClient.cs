@@ -122,11 +122,6 @@ namespace Microsoft.Azure.Management.Sql
         IDataMaskingRulesOperations DataMaskingRules { get; }
 
         /// <summary>
-        /// Gets the IElasticPoolsOperations.
-        /// </summary>
-        IElasticPoolsOperations ElasticPools { get; }
-
-        /// <summary>
         /// Gets the IFirewallRulesOperations.
         /// </summary>
         IFirewallRulesOperations FirewallRules { get; }
@@ -140,6 +135,11 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IDatabasesOperations.
         /// </summary>
         IDatabasesOperations Databases { get; }
+
+        /// <summary>
+        /// Gets the IElasticPoolsOperations.
+        /// </summary>
+        IElasticPoolsOperations ElasticPools { get; }
 
         /// <summary>
         /// Gets the IReplicationLinksOperations.
@@ -270,6 +270,11 @@ namespace Microsoft.Azure.Management.Sql
         /// Gets the IDatabaseOperations.
         /// </summary>
         IDatabaseOperations DatabaseOperations { get; }
+
+        /// <summary>
+        /// Gets the IElasticPoolOperations.
+        /// </summary>
+        IElasticPoolOperations ElasticPoolOperations { get; }
 
     }
 }
