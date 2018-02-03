@@ -1,11 +1,14 @@
-2018-01-31 10:51:15 UTC
+
+Type dsc to start/install the DS Consolidated Console
+
+2018-02-03 03:32:34 UTC
 
 1) azure-rest-api-specs repository information
-GitHub user: kosta-bizetic
-Branch:      master
-Commit:      fb9e1b2a7561e7bd7d697011bd063964f2521861
+GitHub user: jaredmoo
+Branch:      master-bucharest
+Commit:      ed4cd1c0ecbbb5546c88c4e8065f5d39da73d439
 
 2) AutoRest information
 Requested version: latest
-Bootstrapper version:    C:\Users\v-kobize\AppData\Roaming\npm `-- autorest@2.0.4245  
+Bootstrapper version:    C:\Users\jaredmoo\AppData\Roaming\npm `-- autorest@2.0.4245  
 Latest installed version:    

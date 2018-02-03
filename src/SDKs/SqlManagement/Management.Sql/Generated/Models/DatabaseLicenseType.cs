@@ -12,12 +12,11 @@ namespace Microsoft.Azure.Management.Sql.Models
 {
 
     /// <summary>
-    /// Defines values for SampleName.
+    /// Defines values for DatabaseLicenseType.
     /// </summary>
-    public static class SampleName
+    public static class DatabaseLicenseType
     {
-        public const string AdventureWorksLT = "AdventureWorksLT";
-        public const string WideWorldImportersStd = "WideWorldImportersStd";
-        public const string WideWorldImportersFull = "WideWorldImportersFull";
+        public const string Included = "Included";
+        public const string BasePrice = "Base Price";
     }
 }

@@ -12,12 +12,11 @@ namespace Microsoft.Azure.Management.Sql.Models
 {
 
     /// <summary>
-    /// Defines values for SampleName.
+    /// Defines values for DatabaseReadScale.
     /// </summary>
-    public static class SampleName
+    public static class DatabaseReadScale
     {
-        public const string AdventureWorksLT = "AdventureWorksLT";
-        public const string WideWorldImportersStd = "WideWorldImportersStd";
-        public const string WideWorldImportersFull = "WideWorldImportersFull";
+        public const string Enabled = "Enabled";
+        public const string Disabled = "Disabled";
     }
 }

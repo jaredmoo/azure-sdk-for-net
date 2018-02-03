@@ -12,12 +12,11 @@ namespace Microsoft.Azure.Management.Sql.Models
 {
 
     /// <summary>
-    /// Defines values for SampleName.
+    /// Defines values for CatalogCollationType.
     /// </summary>
-    public static class SampleName
+    public static class CatalogCollationType
     {
-        public const string AdventureWorksLT = "AdventureWorksLT";
-        public const string WideWorldImportersStd = "WideWorldImportersStd";
-        public const string WideWorldImportersFull = "WideWorldImportersFull";
+        public const string DATABASEDEFAULT = "DATABASE_DEFAULT";
+        public const string SQLLatin1GeneralCP1CIAS = "SQL_Latin1_General_CP1_CI_AS";
     }
 }
