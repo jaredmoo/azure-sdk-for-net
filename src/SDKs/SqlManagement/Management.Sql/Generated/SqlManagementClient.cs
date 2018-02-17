@@ -307,11 +307,6 @@ namespace Microsoft.Azure.Management.Sql
         public virtual IJobVersionsOperations JobVersions { get; private set; }
 
         /// <summary>
-        /// Gets the IServerAutomaticTuningOperations.
-        /// </summary>
-        public virtual IServerAutomaticTuningOperations ServerAutomaticTuning { get; private set; }
-
-        /// <summary>
         /// Gets the IServerDnsAliasesOperations.
         /// </summary>
         public virtual IServerDnsAliasesOperations ServerDnsAliases { get; private set; }

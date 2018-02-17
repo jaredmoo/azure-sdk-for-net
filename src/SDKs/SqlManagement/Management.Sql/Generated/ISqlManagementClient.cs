@@ -302,11 +302,6 @@ namespace Microsoft.Azure.Management.Sql
         IJobVersionsOperations JobVersions { get; }
 
         /// <summary>
-        /// Gets the IServerAutomaticTuningOperations.
-        /// </summary>
-        IServerAutomaticTuningOperations ServerAutomaticTuning { get; }
-
-        /// <summary>
         /// Gets the IServerDnsAliasesOperations.
         /// </summary>
         IServerDnsAliasesOperations ServerDnsAliases { get; }
